@@ -1,35 +1,25 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// import { useSelector } from "react-redux";
-// import { selectNewDisney } from "../features/movie/movieSlice";
+import { useSelector } from "react-redux";
+import { selectNewDisney } from "../features/movie/movieSlice";
 
 const Trending = (props) => {
-//  const movies = useSelector(selectNewDisney);
+  const movies = useSelector(selectNewDisney);
 
   return (
     <Container>
       <h4>Trending</h4>
       <Content>
-                <Wrap>
-                    <Link to='/' >
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxq6NS7ac4G4gNYubM5bqtIY28EQg9x94bHw&usqp=CAU" alt=""/>
-                    </Link>
-                </Wrap>
-                <Wrap>
-                    <Link to='/' >
-                        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_2_5x/sources/r1/cms/prod/6497/1316497-h-0073cb514439" alt=""/>
-                    </Link>
-                </Wrap>
-                <Wrap>
-                    <Link to='/' >
-                        <img src="https://www.millenniumpost.in/h-upload/2022/12/16/1600x960_658838-aar-ya-paar-poster.jpg" alt=""/>
-                    </Link>
-                </Wrap>
-                <Wrap>
-                    <Link to='/' >
-                        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1x/sources/r1/cms/prod/6534/1476534-h-6bd0ba8efed0" alt=""/>
-                    </Link>
-                </Wrap>
+               {
+                  movies && movies.map((movie, key)=> (
+                    <Wrap key={key}>
+                        {movie.id}
+                        <Link to={'/detail/' +movie.id}>
+                          <img src={movie.cardImg} alt={movie.title}/>
+                        </Link>
+                    </Wrap>
+                  ))
+               }
         </Content>
     </Container>
   );

@@ -1,36 +1,54 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// import { useSelector } from "react-redux";
-//import { selectRecommend } from "../features/movie/movieSlice";
+import { useSelector } from "react-redux";
+import { selectRecommend } from "../features/movie/movieSlice";
 
 const Recommends = (props) => {
-//   const movies = useSelector(selectRecommend);
-//   console.log(movies, ":🛢️");
+  const movies = useSelector(selectRecommend);
+  console.log(movies, ":🛢️");
+
+  // return (
+  //   <Container>
+  //       <h4>Recommended for You</h4>
+  //       <Content>
+  //               <Wrap>
+  //                   <Link to='/' >
+  //                       <img src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_2_5x/sources/r1/cms/prod/4253/734253-h" alt=""/>
+  //                   </Link>
+  //               </Wrap>
+  //               <Wrap>
+  //                   <Link to='/' >
+  //                       <img src="https://i.ytimg.com/vi/5Y4yJOhg4pI/hqdefault.jpg" alt=""/>
+  //                   </Link>
+  //               </Wrap>
+  //               <Wrap>
+  //                   <Link to='/' >
+  //                       <img src="https://images.thedirect.com/media/article_big/avatar-2-disney-plus-release-date.jpg?imgeng=cmpr_75/" alt=""/>
+  //                   </Link>
+  //               </Wrap>
+  //               <Wrap>
+  //                   <Link to='/' >
+  //                       <img src="https://i0.wp.com/urbanasian.com/wp-content/uploads/2020/09/The-Right-Stuff_Disney-Hotstar-Premium.jpg?fit=1366%2C768&ssl=1" alt=""/>
+  //                   </Link>
+  //               </Wrap>
+  //       </Content>
+  //   </Container>
+  // );
 
   return (
     <Container>
         <h4>Recommended for You</h4>
         <Content>
-                <Wrap>
-                    <Link to='/' >
-                        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_web_hs_2_5x/sources/r1/cms/prod/4253/734253-h" alt=""/>
-                    </Link>
-                </Wrap>
-                <Wrap>
-                    <Link to='/' >
-                        <img src="https://i.ytimg.com/vi/5Y4yJOhg4pI/hqdefault.jpg" alt=""/>
-                    </Link>
-                </Wrap>
-                <Wrap>
-                    <Link to='/' >
-                        <img src="https://images.thedirect.com/media/article_big/avatar-2-disney-plus-release-date.jpg?imgeng=cmpr_75/" alt=""/>
-                    </Link>
-                </Wrap>
-                <Wrap>
-                    <Link to='/' >
-                        <img src="https://i0.wp.com/urbanasian.com/wp-content/uploads/2020/09/The-Right-Stuff_Disney-Hotstar-Premium.jpg?fit=1366%2C768&ssl=1" alt=""/>
-                    </Link>
-                </Wrap>
+               {
+                  movies && movies.map((movie, key)=> (
+                    <Wrap key={key}>
+                        {movie.id}
+                        <Link to={'/detail/' +movie.id}>
+                          <img src={movie.cardImg} alt={movie.title}/>
+                        </Link>
+                    </Wrap>
+                  ))
+               }
         </Content>
     </Container>
   );
